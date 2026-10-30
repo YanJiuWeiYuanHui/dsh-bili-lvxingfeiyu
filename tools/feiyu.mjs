@@ -986,7 +986,7 @@ async function cmdSelftest() {
 function cmdDoctor() {
   const { items } = collectChecks()
   const bad = items.filter((i) => !i.ok)
-  process.stdout.write('\n旅行肥鱼 体检\n' + '─'.repeat(52) + '\n')
+  process.stdout.write('\n旅行肥鱼 v1.0.0 体检\n' + '─'.repeat(52) + '\n')
   for (const i of items) {
     const mark = i.ok ? '✔' : '✘'
     process.stdout.write(mark + ' ' + i.name.padEnd(14, ' ') + ' ' + String(i.detail ?? '').slice(0, 60) + '\n')

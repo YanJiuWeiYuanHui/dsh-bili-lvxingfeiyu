@@ -1,7 +1,7 @@
 {
   "name": "dsh-bili-lvxingfeiyu",
-  "version": "0.1.0",
-  "description": "打卡：读本机已有的视频帧，把她的角色参考图一起送进生图 API，产出「她站在那里」的图；可存相册、发图文动态、私信、评论区 @。",
+  "version": "1.0.0",
+  "description": "旅行肥鱼 —— 她看完视频挑一个自己站得进去的地方，把角色参考图和那一帧送进生图模型，再写成一篇旅行日记",
   "keywords": [
     "dsh",
     "dsh-plugin",
