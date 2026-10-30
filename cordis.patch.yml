@@ -1,0 +1,12 @@
+# ============================================================================
+# dsh-bili-lvxingfeiyu —— DSH bundle patch
+# ============================================================================
+# ⚠️ `name:` 必须与安装后的包名完全一致（dsh-bili-lvxingfeiyu），否则表现为「装上了但设置页 404」。
+#
+# 安装：dsh plugin --profile desktop add "link:C:\\Users\\<你>\\Desktop\\dsh-bili-lvxingfeiyu"
+# 装完重启一次 DSH，设置里会出现「旅行肥鱼」。
+# ============================================================================
+
+- insert:
+    - id: dsh-bili-lvxingfeiyu
+      name: dsh-bili-lvxingfeiyu
