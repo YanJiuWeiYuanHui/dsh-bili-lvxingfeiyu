@@ -435,6 +435,8 @@ async function cmdRender() {
   // 真正要花钱了，这时候才卡日额度
   if (q.count >= Number(cfg.daily ?? 1)) die({ error: `今天额度已用完（${q.count}/${cfg.daily}），明天再来；草稿会留在队列里` })
   const r = await generate({
+    kind: cfg.api.kind ?? 'openai',
+    workflow: cfg.api.workflow || undefined,
     endpoint: cfg.api.endpoint,
     apiKey: secret.apiKey,
     model: cfg.api.model,
@@ -986,7 +988,7 @@ async function cmdSelftest() {
 function cmdDoctor() {
   const { items } = collectChecks()
   const bad = items.filter((i) => !i.ok)
-  process.stdout.write('\n旅行肥鱼 v1.0.0 体检\n' + '─'.repeat(52) + '\n')
+  process.stdout.write('\n旅行肥鱼 v1.0.1 体检\n' + '─'.repeat(52) + '\n')
   for (const i of items) {
     const mark = i.ok ? '✔' : '✘'
     process.stdout.write(mark + ' ' + i.name.padEnd(14, ' ') + ' ' + String(i.detail ?? '').slice(0, 60) + '\n')

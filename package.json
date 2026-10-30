@@ -1,6 +1,6 @@
 {
   "name": "dsh-bili-lvxingfeiyu",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "旅行肥鱼 —— 她看完视频挑一个自己站得进去的地方，把角色参考图和那一帧送进生图模型，再写成一篇旅行日记",
   "keywords": [
     "dsh",

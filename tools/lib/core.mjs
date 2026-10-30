@@ -44,6 +44,10 @@ export const DEFAULTS = {
   api: {
     endpoint: 'https://api.openai.com/v1',
     model: 'gpt-image-2',
+    // 生图后端：openai = 任何 OpenAI 兼容接口（含本地 LocalAI/SwarmUI）
+    //          comfy  = 本地 ComfyUI，走工作流 JSON
+    kind: 'openai',
+    workflow: '',
     size: 'follow',               // follow = 跟截图同比例 | 显式 "1536x1024"
     extraHeaders: {},
     timeoutMs: 180000,

@@ -1,4 +1,4 @@
-# 旅行肥鱼 v1.0.0（dsh-bili-lvxingfeiyu）
+# 旅行肥鱼 v1.0.1（dsh-bili-lvxingfeiyu）
 
 > 她看完一条视频，挑一个**自己站得进去的地方**，把角色参考图和那一帧一起送进生图模型，
 > 得到一张「她去过那里」的图。可以存相册，也可以发成图文动态、私信、评论区 @。
@@ -51,6 +51,37 @@ node tools/feiyu.mjs doctor
 
 **本插件不修改上游的任何代码**：只调用它的命令行（`bili.mjs`），
 接口位置固定在 `tools/lib/parent.mjs` 的 `ADAPTER` 对象里，换上游只改那一处（见 [ADAPTER.md](./ADAPTER.md)）。
+
+---
+
+## 本地生图模型
+
+设置 → 旅行肥鱼 → **API** 里有一项「生图后端」，两种接法。
+
+### ① OpenAI 兼容（默认）
+
+任何实现了这两个端点的服务都能接——云中转、LocalAI、SwarmUI 都行；本地地址密钥随便填。
+
+```
+POST {endpoint}/images/generations   没参考图时
+POST {endpoint}/images/edits         有参考图时，multipart，字段 image[] 可多张
+```
+
+> ⚠️ 关键在 **`/images/edits` 必须支持多图**：我们一次送「场景帧 + N 张角色参考」。
+> 只吃单张 `init_image` 的（比如 A1111 原生 `/sdapi`）接不了，会丢参考。
+
+### ② 本地 ComfyUI（工作流模式）
+
+ComfyUI 不认 OpenAI 协议，它要工作流 JSON。做法是把你的工作流当**模板**做文本替换：
+
+1. 在 ComfyUI 里搭好图生图流程（`LoadImage` × N + IPAdapter/ControlNet + `KSampler` + `SaveImage`）
+2. 点 **Save (API Format)** 导出 JSON
+3. 在 JSON 里把要变的地方写成占位符：`{{prompt}}` `{{ref1}}` `{{ref2}}` `{{width}}` `{{height}}` `{{seed}}`
+4. 设置里后端选「本地 ComfyUI」，端点填 `http://127.0.0.1:8188`，工作流填 JSON 路径
+
+它会：上传参考图 → 填模板 → `POST /prompt` → 轮询 `/history` → 取 `/view`。
+
+> 第一次接建议先用一条视频手动跑 `render`，确认工作流能出图再接自动。
 
 ## 边界（很重要）
 
